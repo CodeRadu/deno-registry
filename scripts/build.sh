@@ -1,2 +1,2 @@
 npm exec prisma generate
-npm build
+npm run build
