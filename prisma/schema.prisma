@@ -6,20 +6,15 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Package {
-  id            String    @id @map("_id")
-  name          String    @unique
-  latestVersion String
-  versions      Version[]
-}
-
-model Version {
-  id        String   @id @map("_id")
-  version   String
-  Package   Package? @relation(fields: [packageId], references: [id])
-  packageId String?
+  id                 String  @id @default(uuid()) @map("_id")
+  name               String  @unique
+  repository         String  @unique @default("")
+  repositoryName     String  @unique @default("")
+  fullRepositoryName String  @unique @default("")
+  valid              Boolean @default(false)
 }
