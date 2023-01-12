@@ -1,2 +1,2 @@
-pnpm exec prisma generate
-pnpm build
+npm exec prisma generate
+npm build

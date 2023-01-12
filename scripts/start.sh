@@ -1,1 +1,1 @@
-pnpm start
+npm start
