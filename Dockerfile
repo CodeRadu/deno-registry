@@ -8,8 +8,6 @@ RUN pnpm install
 
 COPY . .
 
-RUN chmod +x scripts/build.sh
-
 RUN scripts/build.sh
 
 EXPOSE 3000
