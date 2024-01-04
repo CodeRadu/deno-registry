@@ -9,7 +9,11 @@ export default async function handler(
 ) {
   const name = req.query.pkgname as string
   const pkgId = await getPackageId(name)
-  const pkg = await getPackage(pkgId!)
+  if (!pkgId) {
+    res.status(404).json({ error: true, code: 404 })
+    return
+  }
+  const pkg = await getPackage(pkgId)
   const redirPath = `https://raw.githubusercontent.com/${pkg?.fullRepositoryName}/main/index.ts`
   res.redirect(redirPath)
 }

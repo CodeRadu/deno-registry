@@ -7,7 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const name = req.query.name as string
     const pkgId = await getPackageId(name)
     if (!pkgId) {
-      res.status(404).json({ error: true })
+      res.status(404).json({ error: true, code: 404 })
       return
     }
     const pkg = await getPackage(pkgId)
