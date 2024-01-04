@@ -1,10 +1,12 @@
 import Head from "next/head";
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/router";
 
 const Add = (props: null) => {
   const [name, setName] = useState("<name>");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const router = useRouter();
   function validateName() {
     const regex = /^[a-z-_]+$/;
     return name.match(regex);
@@ -76,9 +78,9 @@ const Add = (props: null) => {
         </div>
         <div className="mb-4">
           You will need to setup a webhook on github with url{" "}
-          {location.protocol}//
-          {location.host}/api/wh/{name} sending just the push event and type to
-          application/json
+          {typeof window !== "undefined" &&
+            `${window.location.origin}/api/wh/${name}`}{" "}
+          sending just the push event and type to application/json
         </div>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:bg-gray-400 disabled:hover:bg-gray-400 transition-all duration-300"
